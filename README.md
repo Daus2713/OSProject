@@ -426,9 +426,9 @@ f65be1987f84   debian    "bash"    19 minutes ago   Exited (137) 18 seconds ago 
 ***Questions:***
 
 1. Are files in the container persistent. Why not?. ***(1 mark)*** <br>
-The files in the container are not persistent. The helloworld.txt removed when user give docker rm command. It deleted all data stored in container. This happens because container designed to be ephemeral and stateless. Containers use for very short time, disposable and do not retain dta after they are removed.
+__The files in the container are not persistent. The helloworld.txt removed when user give docker rm command. It deleted all data stored in container. This happens because container designed to be ephemeral and stateless. Containers use for very short time, disposable and do not retain dta after they are removed.__
 2. Can we run two, or three instances of debian linux? . ***(1 mark)*** <br>
-Yes, we can run multiple instances of debian linux using Docker
+__Yes, we can run multiple instances of debian linux using Docker__
 
 ## Running your own container with persistent storage
 
