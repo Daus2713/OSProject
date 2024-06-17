@@ -453,8 +453,8 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 total 4
 -rw-rw-rw- 1 root root 87 Jun 17 05:16 helloworld.txt
 ```
-User: root
-Group: root
+- User: root
+- Group: root<br>
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
 ```bash
 //use sudo and chown
