@@ -342,11 +342,30 @@ Linux codespaces-fd04be 6.5.0-1021-azure #22~22.04.1-Ubuntu SMP Tue Apr 30 16:08
 ```
 20772288 (approximately 20 GB)
 ```
-13. Name the version and hardware architecture of the linux Virtual environment. ***(1 mark)*** __Fill answer here__.
-14. What is the difference between **ls** vs **ls -asl**. ***(1 mark)*** __Fill answer here__.
-15. What is the TLB size of the Virtual CPU. ***(1 mark)*** __Fill answer here__.
-16. What is the CPU speed of the Virtual CPU. ***(1 mark)*** __Fill answer here__.
-17. What is the top running process that consumes the most CPU cycles. ***(1 mark)*** __Fill answer here__.
+13. Name the version and hardware architecture of the linux Virtual environment. ***(1 mark)***<br>
+```
+Version: Ubuntu 22.04.1
+Hardware Architecture: x86_64
+```
+14. What is the difference between **ls** vs **ls -asl**. ***(1 mark)*** <br>
+```
+ls : Lists the names of files and directories in the current directory.
+ls -asl : Lists detailed information about files and directories in the current directory, including all files (even hidden ones), sizes, and permissions.
+```
+15. What is the TLB size of the Virtual CPU. ***(1 mark)*** <br>
+```
+TLB Size: 2560 4K pages
+```
+16. What is the CPU speed of the Virtual CPU. ***(1 mark)*** <br>
+```
+CPU Speed: 3243.907 MHz
+```
+17. What is the top running process that consumes the most CPU cycles. ***(1 mark)*** <br>
+```
+Top Running Process (node):
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND             
+   2237 codespa+  20   0   21.5g 343172  49920 S   1.0   4.2   0:46.91 node  
+```
 
 ## Running your own container instance.
 
