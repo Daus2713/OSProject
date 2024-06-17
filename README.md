@@ -492,9 +492,25 @@ docker run --detach -v /workspaces/OSProject/webpage:/usr/local/apache2/htdocs/ 
 
 ***Questions:***
 
-1. What is the permission of folder /usr/local/apache/htdocs and what user and group owns the folder? . ***(2 mark)*** __Fill answer here__.
-2. What port is the apache web server running. ***(1 mark)*** __Fill answer here__.
-3. What port is open for http protocol on the host machine? ***(1 mark)*** __Fill answer here__.
+1. What is the permission of folder /usr/local/apache/htdocs and what user and group owns the folder? . ***(2 mark)*** <br>
+```
+@Daus2713 ➜ /workspaces/OSProject/webpage (main) $ docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED         STATUS         PORTS                                   NAMES
+05228ef38043   httpd     "httpd-foreground"   6 minutes ago   Up 6 minutes   0.0.0.0:8080->80/tcp, :::8080->80/tcp   objective_meninsky
+@Daus2713 ➜ /workspaces/OSProject/webpage (main) $ docker exec -it objective_meninsky /bin/bash
+root@05228ef38043:/usr/local/apache2# ls -ld /usr/local/apache2/htdocs
+drwxr-xr-x+ 2 root root 4096 Jun 17 07:26 /usr/local/apache2/htdocs
+```
+__User: root, Group: root__<br>
+__Permission: drwxr-xr-x__
+- owner root can read, write, execute
+- group root and others can read and execute
+
+
+2. What port is the apache web server running. ***(1 mark)*** <br>
+Apache web server running on port 80
+3. What port is open for http protocol on the host machine? ***(1 mark)*** <br>
+Port 8080 is open for HTTP protocol on the host machine
 
 ## Create SUB Networks
 
@@ -513,11 +529,59 @@ docker run -itd --net rednet --name c2 busybox sh
 ```
 ***Questions:***
 
-1. Describe what is busybox and what is command switch **--name** is for? . ***(2 mark)*** __Fill answer here__.
-2. Explore the network using the command ```docker network ls```, show the output of your terminal. ***(1 mark)*** __Fill answer here__.
-3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)*** __Fill answer here__.
-4. What is the network address for the running container c1 and c2? ***(1 mark)*** __Fill answer here__.
-5. Using the command ```docker exec c1 ping c2```, which basically tries to do a ping from container c1 to c2. Are you able to ping? Show your output . ***(1 mark)*** __Fill answer here__.
+1. Describe what is busybox and what is command switch **--name** is for? . ***(2 mark)*** <br>
+__BusyBox is a software suite that provides several Unix utilities in a single executable file.__
+__--name switch is used to assign a specific name to a Docker container. Later can be use as reference of the container. Instead the name automatically generated, the container can be named using user-defined name__
+
+2. Explore the network using the command ```docker network ls```, show the output of your terminal. ***(1 mark)*** <br>
+```
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+4093cbbf0aa4   bluenet   bridge    local
+a34414797886   bridge    bridge    local
+388b6f48f888   host      host      local
+a9f65c0b6458   none      null      local
+d0599ef0ecfc   rednet    bridge    local
+```
+3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)*** <br>
+- Gateway for bluenet (172.18.0.1)
+```
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker inspect c1 | grep Gateway
+            "Gateway": "",
+            "IPv6Gateway": "",
+                    "Gateway": "172.18.0.1",
+                    "IPv6Gateway": "",
+```
+
+- Gateway for rednet (172.19.0.1)
+```
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker inspect c2 | grep Gateway
+            "Gateway": "",
+            "IPv6Gateway": "",
+                    "Gateway": "172.19.0.1",
+                    "IPv6Gateway": "",
+```
+4. What is the network address for the running container c1 and c2? ***(1 mark)*** <br>
+- IP Address for c1 (172.18.0.2)
+```
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker inspect c1 | grep IPAddress
+            "SecondaryIPAddresses": null,
+            "IPAddress": "",
+                    "IPAddress": "172.18.0.2",
+```
+- IP Address for c2 (172.19.0.2)
+```
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker inspect c2 | grep IPAddress
+            "SecondaryIPAddresses": null,
+            "IPAddress": "",
+                    "IPAddress": "172.19.0.2",
+```
+5. Using the command ```docker exec c1 ping c2```, which basically tries to do a ping from container c1 to c2. Are you able to ping? Show your output . ***(1 mark)*** <br>
+```
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker exec c1 ping c2
+ping: bad address 'c2'
+```
+- Ping failed because c1 and c2 are on different networks(bluenet and rednet). Containers cannot communicate with each other directly if both in different networks.
 
 ## Bridging two SUB Networks
 1. Let's try this again by creating a network to bridge the two containers in the two subnetworks
@@ -529,8 +593,37 @@ docker exec c1 ping c2
 ```
 ***Questions:***
 
-1. Are you able to ping? Show your output . ***(1 mark)*** __Fill answer here__.
-2. What is different from the previous ping in the section above? ***(1 mark)*** __Fill answer here__.
+1. Are you able to ping? Show your output . ***(1 mark)*** <br>
+__Yes, I able to ping between two networks__
+```
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker network create bridgenet
+18698d43c6a4e08e4fe1543ae906ec36583018168a7a12672673e6c42ea01e9d
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker network connect bridgenet c1
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker network connect bridgenet c2
+@Daus2713 ➜ /workspaces/OSProject (main) $ docker exec c1 ping c2
+PING c2 (172.20.0.3): 56 data bytes
+64 bytes from 172.20.0.3: seq=0 ttl=64 time=0.127 ms
+64 bytes from 172.20.0.3: seq=1 ttl=64 time=0.069 ms
+64 bytes from 172.20.0.3: seq=2 ttl=64 time=0.068 ms
+64 bytes from 172.20.0.3: seq=3 ttl=64 time=0.081 ms
+64 bytes from 172.20.0.3: seq=4 ttl=64 time=0.141 ms
+64 bytes from 172.20.0.3: seq=5 ttl=64 time=0.083 ms
+64 bytes from 172.20.0.3: seq=6 ttl=64 time=0.103 ms
+64 bytes from 172.20.0.3: seq=7 ttl=64 time=0.095 ms
+64 bytes from 172.20.0.3: seq=8 ttl=64 time=0.109 ms
+64 bytes from 172.20.0.3: seq=9 ttl=64 time=0.090 ms
+64 bytes from 172.20.0.3: seq=10 ttl=64 time=0.086 ms
+64 bytes from 172.20.0.3: seq=11 ttl=64 time=0.072 ms
+64 bytes from 172.20.0.3: seq=12 ttl=64 time=0.105 ms
+64 bytes from 172.20.0.3: seq=13 ttl=64 time=0.087 ms
+64 bytes from 172.20.0.3: seq=14 ttl=64 time=0.108 ms
+64 bytes from 172.20.0.3: seq=15 ttl=64 time=0.083 ms
+64 bytes from 172.20.0.3: seq=16 ttl=64 time=0.090 ms
+^C
+```
+
+2. What is different from the previous ping in the section above? ***(1 mark)***<br>
+__In previous attempt, the ping failed because c1 and c2 were on different networks (bluenet and rednet) and could not communicate directly. After creating and connecting both containers to the bridgenet network, they are now able to communicate with each other, and the ping is successful.__
 
 ## Intermediate Level (10 marks bonus)
 
