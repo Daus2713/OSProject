@@ -425,8 +425,10 @@ f65be1987f84   debian    "bash"    19 minutes ago   Exited (137) 18 seconds ago 
 
 ***Questions:***
 
-1. Are files in the container persistent. Why not?. ***(1 mark)*** __Fill answer here__.
-2. Can we run two, or three instances of debian linux? . ***(1 mark)*** __Fill answer here__.
+1. Are files in the container persistent. Why not?. ***(1 mark)*** <br>
+The files in the container are not persistent. The helloworld.txt removed when user give docker rm command. It deleted all data stored in container. This happens because container designed to be ephemeral and stateless. Containers use for very short time, disposable and do not retain dta after they are removed.
+2. Can we run two, or three instances of debian linux? . ***(1 mark)*** <br>
+Yes, we can run multiple instances of debian linux using Docker
 
 ## Running your own container with persistent storage
 
@@ -445,14 +447,26 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 
 ***Questions:***
 
-1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** __Fill answer here__.
+1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** <br>
+```
+@Daus2713 ➜ /workspaces/OSProject (main) $ ls -l /workspaces/OSProject/myroot
+total 4
+-rw-rw-rw- 1 root root 87 Jun 17 05:16 helloworld.txt
+```
+User: root
+Group: root
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
 ```bash
 //use sudo and chown
 sudo chown -R codespace:codespace myroot
-
 ```
-*** __Fill answer here__.***
+Yes, I can change it from user root to user codespace
+```
+@Daus2713 ➜ /workspaces/OSProject (main) $ sudo chown -R codespace:codespace myroot
+@Daus2713 ➜ /workspaces/OSProject (main) $ ls -l /workspaces/OSProject/myroot
+total 4
+-rw-rw-rw- 1 codespace codespace 87 Jun 17 05:16 helloworld.txt
+```
 
 ## You are on your own, create your own static webpage
 

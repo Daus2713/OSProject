@@ -1,0 +1,2 @@
+Hello I'm Firdaus (2211901)
+Now trying to run my own container with persistent storage
