@@ -28,7 +28,7 @@ Team Mates:
 __https://github.com/Daus2713/OSProject.git__.
 
 3. How many files and folders are in this repository. ***(1 mark)***<br>
-__7 files and 1 folder__.
+___7 files and 1 folder (Starting Project)___
 
 
 ## Exploring github codespaces
@@ -61,12 +61,12 @@ __7 files and 1 folder__.
 ***Questions:***
 
 1. What is default OS used to run the virtual environment for codespaces. ***(1 mark)***<br>
-__Ubuntu Linux__.
+___Ubuntu Linux___
 2. What are the two options of ram, disk and vcpu configuration you can have in running codespaces . ***(1 mark)***<br>
-__- 2 core vCPU, 8 GB RAM and 32 GB storage__.<br>
-__- 4 core vCPU, 16 GB RAM and 32 GB storage__.
+___- 2 core vCPU, 8 GB RAM and 32 GB storage___<br>
+___- 4 core vCPU, 16 GB RAM and 32 GB storage___
 3. Why must we commit and sync our current work on source control? ***(1 mark)***<br> 
-__To make sure our work is saved into the main repository and not lost when submit the project later__.
+___To make sure our work is saved into the main repository and not lost when submit the project later___
 
 ## Exploring the Terminal
 
@@ -426,9 +426,9 @@ f65be1987f84   debian    "bash"    19 minutes ago   Exited (137) 18 seconds ago 
 ***Questions:***
 
 1. Are files in the container persistent. Why not?. ***(1 mark)*** <br>
-__The files in the container are not persistent. The helloworld.txt removed when user give docker rm command. It deleted all data stored in container. This happens because container designed to be ephemeral and stateless. Containers use for very short time, disposable and do not retain dta after they are removed.__
+___The files in the container are not persistent. The helloworld.txt removed when user give docker rm command. It deleted all data stored in container. This happens because container designed to be ephemeral and stateless. Containers use for very short time, disposable and do not retain dta after they are removed.___
 2. Can we run two, or three instances of debian linux? . ***(1 mark)*** <br>
-__Yes, we can run multiple instances of debian linux using Docker__
+___Yes, we can run multiple instances of debian linux using Docker___
 
 ## Running your own container with persistent storage
 
@@ -453,14 +453,14 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 total 4
 -rw-rw-rw- 1 root root 87 Jun 17 05:16 helloworld.txt
 ```
-- User: root
-- Group: root<br>
+__- User: root__
+__- Group: root__<br>
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
 ```bash
 //use sudo and chown
 sudo chown -R codespace:codespace myroot
 ```
-Yes, I can change it from user root to user codespace
+___Yes, I can change it from user root to user codespace___
 ```
 @Daus2713 ➜ /workspaces/OSProject (main) $ sudo chown -R codespace:codespace myroot
 @Daus2713 ➜ /workspaces/OSProject (main) $ ls -l /workspaces/OSProject/myroot
@@ -501,10 +501,10 @@ CONTAINER ID   IMAGE     COMMAND              CREATED         STATUS         POR
 root@05228ef38043:/usr/local/apache2# ls -ld /usr/local/apache2/htdocs
 drwxr-xr-x+ 2 root root 4096 Jun 17 07:26 /usr/local/apache2/htdocs
 ```
-__User: root, Group: root__<br>
-__Permission: drwxr-xr-x__
-- owner root can read, write, execute
-- group root and others can read and execute
+___User: root, Group: root___<br>
+___Permission: drwxr-xr-x___
+__- owner root can read, write, execute__
+__- group root and others can read and execute__
 
 
 2. What port is the apache web server running. ***(1 mark)*** <br>
@@ -530,8 +530,8 @@ docker run -itd --net rednet --name c2 busybox sh
 ***Questions:***
 
 1. Describe what is busybox and what is command switch **--name** is for? . ***(2 mark)*** <br>
-__BusyBox is a software suite that provides several Unix utilities in a single executable file.__
-__--name switch is used to assign a specific name to a Docker container. Later can be use as reference of the container. Instead the name automatically generated, the container can be named using user-defined name__
+___BusyBox is a software suite that provides several Unix utilities in a single executable file.___
+___--name switch is used to assign a specific name to a Docker container. Later can be use as reference of the container. Instead the name automatically generated, the container can be named using user-defined name___
 
 2. Explore the network using the command ```docker network ls```, show the output of your terminal. ***(1 mark)*** <br>
 ```
@@ -544,7 +544,7 @@ a9f65c0b6458   none      null      local
 d0599ef0ecfc   rednet    bridge    local
 ```
 3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)*** <br>
-- Gateway for bluenet (172.18.0.1)
+___- Gateway for bluenet (172.18.0.1)___
 ```
 @Daus2713 ➜ /workspaces/OSProject (main) $ docker inspect c1 | grep Gateway
             "Gateway": "",
@@ -553,7 +553,7 @@ d0599ef0ecfc   rednet    bridge    local
                     "IPv6Gateway": "",
 ```
 
-- Gateway for rednet (172.19.0.1)
+___- Gateway for rednet (172.19.0.1)___
 ```
 @Daus2713 ➜ /workspaces/OSProject (main) $ docker inspect c2 | grep Gateway
             "Gateway": "",
@@ -562,14 +562,14 @@ d0599ef0ecfc   rednet    bridge    local
                     "IPv6Gateway": "",
 ```
 4. What is the network address for the running container c1 and c2? ***(1 mark)*** <br>
-- IP Address for c1 (172.18.0.2)
+___- IP Address for c1 (172.18.0.2)___
 ```
 @Daus2713 ➜ /workspaces/OSProject (main) $ docker inspect c1 | grep IPAddress
             "SecondaryIPAddresses": null,
             "IPAddress": "",
                     "IPAddress": "172.18.0.2",
 ```
-- IP Address for c2 (172.19.0.2)
+___- IP Address for c2 (172.19.0.2)___
 ```
 @Daus2713 ➜ /workspaces/OSProject (main) $ docker inspect c2 | grep IPAddress
             "SecondaryIPAddresses": null,
@@ -581,7 +581,7 @@ d0599ef0ecfc   rednet    bridge    local
 @Daus2713 ➜ /workspaces/OSProject (main) $ docker exec c1 ping c2
 ping: bad address 'c2'
 ```
-- Ping failed because c1 and c2 are on different networks(bluenet and rednet). Containers cannot communicate with each other directly if both in different networks.
+___- Ping failed because c1 and c2 are on different networks(bluenet and rednet). Containers cannot communicate with each other directly if both in different networks.___
 
 ## Bridging two SUB Networks
 1. Let's try this again by creating a network to bridge the two containers in the two subnetworks
@@ -594,7 +594,7 @@ docker exec c1 ping c2
 ***Questions:***
 
 1. Are you able to ping? Show your output . ***(1 mark)*** <br>
-__Yes, I able to ping between two networks__
+___Yes, I able to ping between two networks___
 ```
 @Daus2713 ➜ /workspaces/OSProject (main) $ docker network create bridgenet
 18698d43c6a4e08e4fe1543ae906ec36583018168a7a12672673e6c42ea01e9d
@@ -623,7 +623,7 @@ PING c2 (172.20.0.3): 56 data bytes
 ```
 
 2. What is different from the previous ping in the section above? ***(1 mark)***<br>
-__In previous attempt, the ping failed because c1 and c2 were on different networks (bluenet and rednet) and could not communicate directly. After creating and connecting both containers to the bridgenet network, they are now able to communicate with each other, and the ping is successful.__
+___In previous attempt, the ping failed because c1 and c2 were on different networks (bluenet and rednet) and could not communicate directly. After creating and connecting both containers to the bridgenet network, they are now able to communicate with each other, and the ping is successful.___
 
 ## Intermediate Level (10 marks bonus)
 
@@ -766,8 +766,24 @@ You have now set up a Node.js application in a Docker container on nodejsnet net
 
 ***Questions:***
 
-1. What is the output of step 5 above, explain the error? ***(1 mark)*** __Fill answer here__.
-2. Show the instruction needed to make this work. ***(1 mark)*** __Fill answer here__.
+1. What is the output of step 5 above, explain the error? ***(1 mark)*** <br>
+___The response shows 'Cannot Get /' and Server Error<br>
+The error message in nodejs-container logs file: Error connecting to MySQL: Error: getaddrinfo ENOTFOUND mysql-container. This happens because the Node js container is on a different network (nodejsnet) from the MySQL container (mysqlnet), so it cannot resolve the hostname mysql-container.___
+2. Show the instruction needed to make this work. ***(1 mark)*** <br>
+___To make this work, we need to create a  bridge network (bridgenetnodejs) and ensure both the MySQL and Node js containers are connected to this network.___
+```
+@Daus2713 ➜ /workspaces/OSProject/nodejs-app (main) $ docker network connect bridgenetnodejs mysql-container
+@Daus2713 ➜ /workspaces/OSProject/nodejs-app (main) $ docker network connect bridgenetnodejs nodejs-container
+@Daus2713 ➜ /workspaces/OSProject/nodejs-app (main) $ docker exec nodejs-container ping mysql-container
+PING mysql-container (172.25.0.2) 56(84) bytes of data.
+64 bytes from mysql-container.bridgenetnodejs (172.25.0.2): icmp_seq=1 ttl=64 time=0.105 ms
+64 bytes from mysql-container.bridgenetnodejs (172.25.0.2): icmp_seq=2 ttl=64 time=0.074 ms
+64 bytes from mysql-container.bridgenetnodejs (172.25.0.2): icmp_seq=3 ttl=64 time=0.050 ms
+64 bytes from mysql-container.bridgenetnodejs (172.25.0.2): icmp_seq=4 ttl=64 time=0.067 ms
+64 bytes from mysql-container.bridgenetnodejs (172.25.0.2): icmp_seq=5 ttl=64 time=0.084 ms
+64 bytes from mysql-container.bridgenetnodejs (172.25.0.2): icmp_seq=6 ttl=64 time=0.073 ms
+64 bytes from mysql-container.bridgenetnodejs (172.25.0.2): icmp_seq=7 ttl=64 time=0.053 ms
+```
 
 
 
