@@ -453,8 +453,8 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 total 4
 -rw-rw-rw- 1 root root 87 Jun 17 05:16 helloworld.txt
 ```
-__- User: root__
-__- Group: root__<br>
+__- User: root__ <br>
+__- Group: root__<br><br>
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
 ```bash
 //use sudo and chown
@@ -502,9 +502,9 @@ root@05228ef38043:/usr/local/apache2# ls -ld /usr/local/apache2/htdocs
 drwxr-xr-x+ 2 root root 4096 Jun 17 07:26 /usr/local/apache2/htdocs
 ```
 ___User: root, Group: root___<br>
-___Permission: drwxr-xr-x___
-__- owner root can read, write, execute__
-__- group root and others can read and execute__
+___Permission: drwxr-xr-x___ <br>
+__- owner root can read, write, execute__<br>
+__- group root and others can read and execute__<br><br>
 
 
 2. What port is the apache web server running. ***(1 mark)*** <br>
